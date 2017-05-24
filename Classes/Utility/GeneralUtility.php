@@ -829,7 +829,7 @@ class GeneralUtility implements SingletonInterface
 
     static public function generateRandomID()
     {
-        $randomID = md5(\Typoheads\Formhandler\Utility\Globals::getFormValuesPrefix() . \TYPO3\CMS\Core\Utility\GeneralUtility::generateRandomBytes(10));
+        $randomID = md5(\Typoheads\Formhandler\Utility\Globals::getFormValuesPrefix() . \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Crypto\Random::class)->generateRandomBytes(10));
         return $randomID;
     }
 
@@ -845,7 +845,7 @@ class GeneralUtility implements SingletonInterface
         $GLOBALS['TSFE']->fe_user->fetchGroupData();
 
         // Include the TCA
-        \TYPO3\CMS\Frontend\Utility\EidUtility::initTCA();
+        \TYPO3\CMS\Core\Core\Bootstrap::getInstance()->loadCachedTca();
 
         // Get the page
         $GLOBALS['TSFE']->fetch_the_id();
