@@ -16,3 +16,17 @@ $GLOBALS['TCA']['tt_content']['types'][$_EXTKEY . '_pi1']['showitem'] = '
 ';
 // Add flexform field to plugin options
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY . '_pi1'] = 'pi_flexform';
+
+if (TYPO3_MODE === 'BE') {
+    $file = 'FILE:EXT:formhandler/Configuration/FlexForms/flexform_ds.xml';
+    // Add flexform DataStructure
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue('*', $file, $_EXTKEY . '_pi1');
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(
+        [
+            'LLL:EXT:formhandler/Resources/Private/Language/locallang_db.xml:tt_content.list_type_pi1',
+            $_EXTKEY . '_pi1'
+        ],
+        'CType',
+        'formhandler'
+    );
+}
