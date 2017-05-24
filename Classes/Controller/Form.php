@@ -810,7 +810,7 @@ class Form extends AbstractController
                                         $uploadedUrl = rtrim(\TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('TYPO3_SITE_URL'), '/');
                                         $uploadedUrl .= '/' . trim($uploadFolder, '/') . '/';
                                         $uploadedUrl .= trim($uploadedFileName, '/');
-                                        
+
                                         $tmp['uploaded_url'] = $uploadedUrl;
                                         $tmp['size'] = $files['size'][$field][$idx];
                                         if (is_array($files['type'][$field][$idx])) {
@@ -1434,7 +1434,11 @@ class Form extends AbstractController
             $file = $fileOptions['file'];
             if (strlen(trim($file)) > 0) {
                 $file = $this->utilityFuncs->resolveRelPathFromSiteRoot($file);
-                $pageRenderer = $GLOBALS['TSFE']->getPageRenderer();
+                if (version_compare(TYPO3_version, '8.0.0', '>=')) {
+                    $pageRenderer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
+                } else {
+                    $pageRenderer = $GLOBALS['TSFE']->getPageRenderer();
+                }
                 $pageRenderer->addCssFile(
                     $file,
                     $fileOptions['alternate'] ? 'alternate stylesheet' : 'stylesheet',
