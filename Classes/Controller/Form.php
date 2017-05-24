@@ -1465,7 +1465,7 @@ class Form extends AbstractController
             $file = $fileOptions['file'];
             if (strlen(trim($file)) > 0) {
                 $file = $this->utilityFuncs->resolveRelPathFromSiteRoot($file);
-                $pageRenderer = $GLOBALS['TSFE']->getPageRenderer();
+                $pageRenderer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
                 $pageRenderer->addJsFile(
                     $file,
                     $fileOptions['type'] ? $fileOptions['type'] : 'text/javascript',
@@ -1490,7 +1490,7 @@ class Form extends AbstractController
             $file = $fileOptions['file'];
             if (strlen(trim($file)) > 0) {
                 $file = $this->utilityFuncs->resolveRelPathFromSiteRoot($file);
-                $pageRenderer = $GLOBALS['TSFE']->getPageRenderer();
+                $pageRenderer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
                 $pageRenderer->addJsFooterFile(
                     $file,
                     $fileOptions['type'] ? $fileOptions['type'] : 'text/javascript',
