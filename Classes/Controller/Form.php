@@ -1434,11 +1434,7 @@ class Form extends AbstractController
             $file = $fileOptions['file'];
             if (strlen(trim($file)) > 0) {
                 $file = $this->utilityFuncs->resolveRelPathFromSiteRoot($file);
-                if (version_compare(TYPO3_version, '8.0.0', '>=')) {
-                    $pageRenderer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
-                } else {
-                    $pageRenderer = $GLOBALS['TSFE']->getPageRenderer();
-                }
+                $pageRenderer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
                 $pageRenderer->addCssFile(
                     $file,
                     $fileOptions['alternate'] ? 'alternate stylesheet' : 'stylesheet',
